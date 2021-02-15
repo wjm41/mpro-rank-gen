@@ -3,7 +3,7 @@ import numpy as np
 from rdkit.Chem import Draw, Lipinski, Descriptors, Crippen, MolFromSmiles, AllChem
 from rdkit import Chem
 
-# Read activity data to construct multitask
+# Read activity data
 df = pd.read_csv('activity_data_13Jul2020.csv')
 
 df['mol'] = [MolFromSmiles(x) for x in df['SMILES']]
@@ -37,8 +37,8 @@ print('Number of acry actives: {}'.format(len(df_acry_actives)))
 print('Number of acry inactives: {}'.format(len(df_acry_inactives)))
 print('Number of chloro actives: {}'.format(len(df_chloro_actives)))
 print('Number of chloro inactives: {}'.format(len(df_chloro_inactives)))
-print('Number of noncovalent actives: {}'.format(len(df_rest_actives)))
-print('Number of noncovalent inactives: {}'.format(len(df_rest_inactives)))
+print('Number of noncovalent actives: {}'.format(len(df_noncovalent_actives)))
+print('Number of noncovalent inactives: {}'.format(len(df_noncovalent_inactives)))
 print('Length of original dataset: {}, sum of split datasets: {}'.format(len(df), len(df_acry_actives) +
                                                                          len(df_acry_inactives) + len(df_chloro_actives) +
                                                                          len(df_chloro_inactives) + len(df_noncovalent_actives) +
@@ -63,9 +63,9 @@ print('Acry activity: {:.2f}%'.format(100*len(df_acry_actives)/(len(df_acry_inac
 print('Number of chloro actives: {}'.format(len(df_chloro_actives)))
 print('Number of chloro inactives: {}'.format(len(df_chloro_inactives)))
 print('chloro activity: {:.2f}%'.format(100*len(df_chloro_actives)/(len(df_chloro_inactives)+len(df_chloro_actives))))
-print('Number of noncovalent actives: {}'.format(len(df_rest_actives)))
-print('Number of noncovalent inactives: {}'.format(len(df_rest_inactives)))
-print('noncovalent activity: {:.2f}%'.format(100*len(df_rest_actives)/(len(df_rest_inactives)+len(df_rest_actives))))
+print('Number of noncovalent actives: {}'.format(len(df_noncovalent_actives)))
+print('Number of noncovalent inactives: {}'.format(len(df_noncovalent_inactives)))
+print('noncovalent activity: {:.2f}%'.format(100*len(df_noncovalent_actives)/(len(df_noncovalent_inactives)+len(df_noncovalent_actives))))
 
 print('Length of original dataset: {}, sum of split datasets: {}'.format(len(df), len(df_acry_actives) +
                                                                          len(df_acry_inactives) + len(df_chloro_actives) +
@@ -83,6 +83,6 @@ df_chloro = df_chloro[['SMILES','CID','activity','f_avg_IC50']]
 df_chloro.to_csv('chloroace_activity.smi', index=False)
 
 df_noncovalent = df[~df['acry'] & ~df['chloroace']]
-df_noncovalent = df_rest[['SMILES','CID','activity','f_avg_IC50']]
+df_noncovalent = df_noncovalent[['SMILES','CID','activity','f_avg_IC50']]
 df_noncovalent.to_csv('noncovalent_activity.smi', index=False)
 
