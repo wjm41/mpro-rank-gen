@@ -1,4 +1,7 @@
 # PostEra's Relative Ranking Model
+
+Code pulled from [https://github.com/morraa-postera/ML_Ranking_Model](https://github.com/morraa-postera/ML_Ranking_Model)
+
 **Big Idea**: Predict if compound A will be more or less active than compound B based on the differences in their fingerprint representation.
 - Input: 2 SMILES strings
 - Output: Probability of compound A having a higher activity than compound B
